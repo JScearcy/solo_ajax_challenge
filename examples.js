@@ -4,11 +4,9 @@ $(document).ready(function() {
 
     $.ajax('data.json', {
         success: function(response){
-          response.forEach(function(obj){
-            var $newDataDiv = $('<div>');
-            var $colorPtag = $('<p>');
-            $targetDiv.append($newDataDiv.append($colorPtag.text(obj.color)).css('background-color', obj.value));
-          });
+            var source = $("#entry-template").html();
+            var template = Handlebars.compile(source);
+            $targetDiv.html(template(response))
         },
         error: function(request, errorType, errorMessage){
             alert(errorType + " " + errorMessage);
